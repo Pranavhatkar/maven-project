@@ -15,5 +15,13 @@ pipeline {
           }
         }
       }
+    stage('Deploy to tomacat server') // this tep created by pipline syntax gen by ssh agent 
+    {
+      steps {
+        sshagent(['DEV_CICD']) {
+             sh 'scp -o /var/lib/jenkins/workspace/M1/webapp/target/ec2-user@65.2.153.50:/opt/tomcat/webapps'  
+           }
+        }
+      }
     }
 }
