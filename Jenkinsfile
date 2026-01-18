@@ -11,11 +11,11 @@ pipeline {
     {
       steps {
         withMaven(jdk: 'JDK HOME', maven: 'MVN HOME', traceability: true) {
-         sh 'mvn package' /// this step we have to write 
+         sh 'mvn clean package' /// this step we have to write 
           }
         }
       }
-     stage('Deploy to tomcat server') {
+    /* stage('Deploy to tomcat server') {
     steps {
         sshagent(['ec2-user']) {
             sh '''
@@ -23,7 +23,7 @@ pipeline {
                 ssh -o StrictHostKeyChecking=no ec2-user@172.31.12.14 "sudo mv /tmp/webapp.war /opt/tomcat/webapps/"
             '''
            }
-          }
-         }
+          } 
+         }*/
         }
     }
