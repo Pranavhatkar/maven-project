@@ -12,7 +12,7 @@ pipeline {
       steps {
         withMaven(jdk: 'JDK HOME', maven: 'MVN HOME', traceability: true) {
          withSonarQubeEnv(credentialsId: 'sonarconnection', installationName: 'sonarscanner') {
-                sh 'mvn package sonarqubeserver:sonarscanner '
+                sh 'mvn package sonarscanner:sonarqubeserver '
           }
          
           /// this step we have to write 
