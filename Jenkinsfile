@@ -15,16 +15,15 @@ pipeline {
           }
         }
       }
-     stage('Deploy to tomacat server') // this tep created by pipline syntax gen by ssh agent 
-    {
-      steps {
-        sshagent(['DEV_CICD']) {
-             sh '''
-        scp -o StrictHostKeyChecking=no \
-        webapp/target/webapp.war \
-        ec2-user@172.31.12.14:/opt/tomcat/webapps/
-    '''}
+     stage('Deploy to tomcat server') {
+    steps {
+        sshagent(['ec2-user']) {
+            sh '''
+                scp -o StrictHostKeyChecking=no webapp/target/webapp.war ec2-user@172.31.12.14:/tmp/
+                ssh -o StrictHostKeyChecking=no ec2-user@172.31.12.14 "sudo mv /tmp/webapp.war /opt/tomcat/webapps/"
+            '''
+           }
+          }
+         }
         }
-      } 
     }
-}
