@@ -19,7 +19,7 @@ pipeline {
     {
       steps {
         sshagent(['DEV_CICD']) {
-             sh 'scp -o /var/lib/jenkins/workspace/M1/webapp/target/ec2-user@65.2.153.50:/opt/tomcat/webapps'  
+             sh 'scp webapp/target/webapp.war ec2-user@65.2.153.50:/opt/tomcat/webapps/'  
            }
         }
       }
